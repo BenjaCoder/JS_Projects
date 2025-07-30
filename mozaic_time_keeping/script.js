@@ -12,24 +12,37 @@ window.onload = () => {
     count30.addEventListener("input", function() {
         const minutes = this.value * 30 + count45.value * 45;
         totalMin.innerHTML = `${minutes} minutes`;
-        of85.innerHTML = (minutes / 0.85).toFixed(2);
+        of85.innerHTML = Math.ceil(minutes / 0.85);
         total30.innerHTML = `(${this.value * 30})`;
-        reportTime.innerHTML = 450 - minutes - transport.value;
-        reportMath.innerHTML = `(450 - ${minutes} - ${transport.value})`;
+        const reportHM = 450 - Math.ceil(minutes / 0.85) - transport.value;
+        reportTime.innerHTML = reportHM;
+        reportMath.innerHTML = `(450 - ${Math.ceil(minutes / 0.85)} - ${transport.value})`;
+        const reportHours = Math.floor(reportHM / 60);
+        const reportMinutes = reportHM - (reportHours * 60);
+        document.getElementById("report-time-hours").innerHTML = `${reportHours} hours, ${reportMinutes} minutes`;
     });
 
     count45.addEventListener("input", function() {
         const minutes = this.value * 45 + count30.value * 30;
         totalMin.innerHTML = `${minutes} minutes`;
-        of85.innerHTML = (minutes / 0.85).toFixed(2);
+        of85.innerHTML = Math.ceil(minutes / 0.85);
         total45.innerHTML = `(${this.value * 45})`;
-        reportTime.innerHTML = 450 - minutes - transport.value;
-        reportMath.innerHTML = `(450 - ${minutes} - ${transport.value})`;
+        const reportHM = 450 - Math.ceil(minutes / 0.85) - transport.value;
+        reportTime.innerHTML = reportHM;
+        reportMath.innerHTML = `(450 - ${Math.ceil(minutes / 0.85)} - ${transport.value})`;
+        const reportHours = Math.floor(reportHM / 60);
+        const reportMinutes = reportHM - (reportHours * 60);
+        document.getElementById("report-time-hours").innerHTML = `${reportHours} hours, ${reportMinutes} minutes`;
     });
 
     transport.addEventListener("input", function() {
         const minutes = count30.value * 30 + count45.value * 45;
-        reportTime.innerHTML = 450 - minutes - this.value;
-        reportMath.innerHTML = `(450 - ${minutes} - ${this.value})`;
+        const of85 = Math.ceil(minutes / 0.85);
+        const reportHM = 450 - Math.ceil(minutes / 0.85) - transport.value;
+        reportTime.innerHTML = reportHM;
+        reportMath.innerHTML = `(450 - ${of85} - ${this.value})`;
+        const reportHours = Math.floor(reportHM / 60);
+        const reportMinutes = reportHM - (reportHours * 60);
+        document.getElementById("report-time-hours").innerHTML = `${reportHours} hours, ${reportMinutes} minutes`;
     });
 }
